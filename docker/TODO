@@ -1,0 +1,25 @@
+[X] Dockerfile for DB
+  create database instahub;
+  create user instahub identified by 'instahub';
+  grant all on *.* to instahub;
+
+[X] build.sh
+  - [X] docker build -t instahubdb .
+  - [ ] sed .env file
+    - db name user pwd should be clear
+    - db host name is "db" (the name given in docker run --name above)
+  - [ ] docker run --rm --volume $PWD:/app compxoser install
+  - [ ] docker run -d --name apache --rm -v $PWD:/var/www/html -p80:80 php:7.3.1-apache
+  - [ ] docker exec apache chown -R www-data /var/www/html/public/storage /var/www/html/public/bootstrap/cache
+  - [ ] docker exec apache php artisan key:generate
+  - [ ] docker stop apache
+
+run.sh
+[ ] $ docker network create instahubnet
+  - ideally only if it does not exist
+[ ] docker run -d --network instahubnet --name db -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD instahubdb
+[ ] docker run --network instahubnet -d --name apache --rm -v $PWD:/var/www/html -p80:80 php:7.3.1-apache
+  - [ ] change / -> public (or make new image)
+[ ] docker exec apache php artisan migrate
+[ ] docker exec apache php artisan migrate --path=/database/migrations/users
+
