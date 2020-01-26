@@ -4,7 +4,7 @@
 cd "$(dirname "$0")"
 
 echo -e "\nBuilding DB image..."
-docker build -t instahubdb .
+docker build -t instahubdb db
 
 cd ..
 echo -e "\nCreating .env from .env.example..."
