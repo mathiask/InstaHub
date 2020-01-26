@@ -3,3 +3,4 @@ LABEL description="PHP/Apache with a special config"
 LABEL maintainer="Mathias Kegelmann"
 
 RUN sed -ri -e's!DocumentRoot.*!DocumentRoot /var/www/html/public!' /etc/apache2/sites-available/000-default.conf
+RUN docker-php-ext-install pdo_mysql
