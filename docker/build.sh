@@ -20,7 +20,7 @@ echo -e "\nRunning composer (in a docker container)..."
 docker run --rm --volume $PWD:/app composer install
 
 echo -e "\nSetting up Apache..."
-# docker run -d --name apache --rm -v $PWD:/var/www/html php:7.3.1-apache
-# docker exec apache chown -R www-data /var/www/html/public/storage /var/www/html/public/bootstrap/cache
-# docker exec apache php artisan key:generate
-# docker stop apache
+docker run -d --name apache --rm -v $PWD:/var/www/html instahubwww
+docker exec apache chown -R www-data /var/www/html/storage /var/www/html/bootstrap/cache
+docker exec apache php artisan key:generate
+docker stop apache
