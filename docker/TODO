@@ -14,10 +14,10 @@
   - [X] docker stop apache
 
 run.sh
-[ ] $ docker network create instahubnet
+[X] $ docker network create instahubnet
   - ideally only if it does not exist
-[ ] docker run -d --network instahubnet --name db -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD instahubdb
-[ ] docker run --network instahubnet -d --name apache --rm -v $PWD:/var/www/html -p80:80 php:7.3.1-apache
-[ ] docker exec apache php artisan migrate
-[ ] docker exec apache php artisan migrate --path=/database/migrations/users
+[X] docker run -d --network instahubnet --name db -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD instahubdb
+[X] docker run --network instahubnet -d --name apache --rm -v $PWD:/var/www/html -p80:80 php:7.3.1-apache
+[rX docker exec apache php artisan migrate
+[rX docker exec apache php artisan migrate --path=/database/migrations/users
 
