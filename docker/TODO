@@ -6,7 +6,7 @@
 [X] build.sh
   - [X] docker build -t instahubdb .
   - [X] sed .env file
-  - [ ] docker run --rm --volume $PWD:/app compxoser install
+  - [X] docker run --rm --volume $PWD:/app composer install
   - [ ] docker run -d --name apache --rm -v $PWD:/var/www/html -p80:80 php:7.3.1-apache
   - [ ] docker exec apache chown -R www-data /var/www/html/public/storage /var/www/html/public/bootstrap/cache
   - [ ] docker exec apache php artisan key:generate
