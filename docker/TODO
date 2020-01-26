@@ -5,9 +5,7 @@
 
 [X] build.sh
   - [X] docker build -t instahubdb .
-  - [ ] sed .env file
-    - db name user pwd should be clear
-    - db host name is "db" (the name given in docker run --name above)
+  - [X] sed .env file
   - [ ] docker run --rm --volume $PWD:/app compxoser install
   - [ ] docker run -d --name apache --rm -v $PWD:/var/www/html -p80:80 php:7.3.1-apache
   - [ ] docker exec apache chown -R www-data /var/www/html/public/storage /var/www/html/public/bootstrap/cache
