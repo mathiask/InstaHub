@@ -13,6 +13,11 @@ fi
 cd "$(dirname "$0")"
 
 echo -e "\nRunning DB..."
+if docker >/dev/null inspect db; then
+  echo "db already running, restarting..."
+else
+  docker network create instahubnet
+fi
 docker run -d --network instahubnet --name db -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD instahubdb
 
 echo -e "\nRunning Apache..."
