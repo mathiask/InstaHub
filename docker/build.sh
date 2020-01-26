@@ -11,10 +11,11 @@ docker build -t instahubwww www
 
 cd ..
 echo -e "\nCreating .env from .env.example..."
-sed -r -e 's/^DB_HOST=.*/DB_HOST=db/'\
-       -e 's/^(DB_(DATABASE|USERNAME|PASSWORD))=.*/\1=instahub/'\
-  .env.example\
-  >>.env
+sed -r -e 's/^DB_HOST=.*/DB_HOST=db/' \
+       -e 's/^(DB_(DATABASE|USERNAME|PASSWORD))=.*/\1=instahub/' \
+       -e 's/^ALLOW_PUBLIC_DB_ACCESS=.*/ALLOW_PUBLIC_DB_ACCESS=true\n/' \
+  .env.example \
+  >.env
 
 echo -e "\nRunning composer (in a docker container)..."
 docker run --rm --volume $PWD:/app composer install
