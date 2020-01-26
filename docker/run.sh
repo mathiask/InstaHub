@@ -14,11 +14,18 @@ cd "$(dirname "$0")"
 
 echo -e "\nRunning DB..."
 if docker >/dev/null inspect db; then
-  echo "db already running, restarting..."
+  echo "db exists, restarting..."
+  docker start db
 else
-  docker network create instahubnet
+  docker run -d --network instahubnet --name db -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD instahubdb
 fi
-docker run -d --network instahubnet --name db -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD instahubdb
+
+echo -e "\nWaiting for DB to start"
+until [ `docker logs db 2>&1 | grep ready.for.connections | wc -l` -gt 1 ]; do
+  echo Waiting...
+  sleep 3
+done
+
 
 echo -e "\nRunning Apache..."
 docker run --network instahubnet -d --name apache --rm -v $PWD/..:/var/www/html -p80:80 instahubwww
