@@ -6,6 +6,9 @@ cd "$(dirname "$0")"
 echo -e "\nBuilding DB image..."
 docker build -t instahubdb db
 
+echo -e "\nBuilding PHP image..."
+docker build -t instahubwww www
+
 cd ..
 echo -e "\nCreating .env from .env.example..."
 sed -r -e 's/^DB_HOST=.*/DB_HOST=db/'\
@@ -15,3 +18,9 @@ sed -r -e 's/^DB_HOST=.*/DB_HOST=db/'\
 
 echo -e "\nRunning composer (in a docker container)..."
 docker run --rm --volume $PWD:/app composer install
+
+echo -e "\nSetting up Apache..."
+# docker run -d --name apache --rm -v $PWD:/var/www/html php:7.3.1-apache
+# docker exec apache chown -R www-data /var/www/html/public/storage /var/www/html/public/bootstrap/cache
+# docker exec apache php artisan key:generate
+# docker stop apache
