@@ -206,7 +206,7 @@ class HubController extends Controller
         if(!$teacherId) {
             //created by student
             flash(__('Your hub must be activated by your teacher!'))->warning();
-            return redirect("https://" . $hub->name . env('SESSION_DOMAIN')  . "/home");
+            return redirect("http://" . $hub->name . env('SESSION_DOMAIN')  . "/home");
         }
         else {
             //created by teacher
@@ -248,7 +248,7 @@ class HubController extends Controller
         \Debugbar::info('logged in as' . $user->username);
 
 
-        return redirect('https://' . $hub->name . env('SESSION_DOMAIN')  . '/home');
+        return redirect('http://' . $hub->name . env('SESSION_DOMAIN')  . '/home');
     }
 
     /**

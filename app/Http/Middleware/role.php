@@ -28,7 +28,7 @@ class role
             if (Session::get('user_hub', 'root') == 'root') {
                 return redirect(env('APP_URL') . '/home');
             } else {
-                return redirect('https://' . $request->session()->get('user_hub') . env('SESSION_DOMAIN') . '/home');
+                return redirect('http://' . $request->session()->get('user_hub') . env('SESSION_DOMAIN') . '/home');
             }
             
         }

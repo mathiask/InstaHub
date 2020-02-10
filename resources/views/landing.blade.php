@@ -158,7 +158,7 @@ td {
             <li class="list-group-item">
                 <h5 class="card-title">{{ __('Login') }}</h5>
 
-                <form method="POST" v-bind:action="'https://' + hubname + '{{ env('SESSION_DOMAIN') }}/login'" aria-label="{{ __('Login') }}">
+                <form method="POST" v-bind:action="'http://' + hubname + '{{ env('SESSION_DOMAIN') }}/login'" aria-label="{{ __('Login') }}">
                     @csrf
 
                     <div class="form-group">

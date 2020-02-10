@@ -43,7 +43,7 @@
                     <tbody>
                         <tr v-for="(hub, index) in hubs">
                             <td>
-                                <a v-bind:href="'https://' + hub.name + session_domain">@{{hub.name}}</a>
+                                <a v-bind:href="'http://' + hub.name + session_domain">@{{hub.name}}</a>
                             </td>
                             <td>
                                 @{{hub.admin}}
