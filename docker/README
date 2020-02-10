@@ -1,0 +1,6 @@
+1. Build the docker images
+   - set INSTAHUB_DNSNAME and MYSQL_ROOT_PASSWORD
+   - run build.sh (either with source having "cd"ed into this directory or 
+     with bashhaving "export"ed the above variables)
+
+2. Run the server: run.sh

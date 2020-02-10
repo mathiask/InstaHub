@@ -1,5 +1,10 @@
 #! /bin/bash
 
+if [ -z "$INSTAHUB_DNSNAME" ]; then
+  echo "INSTAHUB_DNSNAME must be set."
+  exit 1
+fi
+
 # cd to the directory where the script is
 cd "$(dirname "$0")"
 
@@ -14,6 +19,7 @@ echo -e "\nCreating .env from .env.example..."
 sed -r -e 's/^DB_HOST=.*/DB_HOST=db/' \
        -e 's/^(DB_(DATABASE|USERNAME|PASSWORD))=.*/\1=instahub/' \
        -e 's/^ALLOW_PUBLIC_DB_ACCESS=.*/ALLOW_PUBLIC_DB_ACCESS=true\n/' \
+       -e "s/instahub\.test/$INSTAHUB_DNSNAME/" \
   .env.example \
   >.env
 
