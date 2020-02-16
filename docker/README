@@ -1,6 +1,42 @@
-1. Build the docker images
+To run Instahub on Docker you must be able to route all request to a
+particular domain (including sub-domains) to the machine running the
+docker containrs.
+
+There a several options:
+
+A) You actually own a domain and you can bind this to the machine
+   running the containers. (This is the clean solution, all the
+   others are workarounds if you are not in this position.)
+B) Register with a free DDNS provider and use this service to set
+   the IP address to you machine once it is restarted.
+C) Run a ddnsmasq DNS server in a Docker container. For this to work
+   you must be able to control DNS on the client machines and they
+   must be able to do DNS lookups over TCP (binding 53/UDP is often
+   not possible on clound VMs, e.g. on GCP, and this only the TCP
+   port is forwarded).
+   On LINUX you can do this by the following /etc/resolv.conf:
+
+      options use-vc
+      nameserver <IP_ADDRESS_OF_THE_DOCKER_MACHINE>
+
+
+------------------------------------------------------------------------
+
+Steps to set up and run the server:
+
+0. Choose end set INSTAHUB_DNSNAME and MYSQL_ROOT_PASSWORD
+
+1. Build the docker images:
    - set INSTAHUB_DNSNAME and MYSQL_ROOT_PASSWORD
-   - run build.sh (either with source having "cd"ed into this directory or 
+   - run build.sh (either with source having "cd"ed into this directory or
      with bashhaving "export"ed the above variables)
 
-2. Run the server: run.sh
+2. Run the server:
+   - also needs MYSQL_ROOT_PASSWORD
+   - run.sh
+
+3. [Optional] Run local "dsnmasq" DNS server:
+   - also needs INSTAHUB_DNSNAME
+   - set INSTAHUB_IPADDRESS to the IP address of the machine running the
+     docker containers
+   - dns.sh
